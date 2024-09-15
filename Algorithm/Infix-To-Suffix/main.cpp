@@ -54,7 +54,7 @@ void in(node* head){
         head = head->next;
     }
 }
-int douutienthuattoan(char x)
+int precedence(char x)
 {
     if (x == '(' || x == ')') return 0;
     if (x == '+' || x == '-') return 1;
@@ -73,7 +73,7 @@ int main(){
     getline(cin, s);
     s = s + "$";
     for(int i = 0; i< s.length(); i++){
-        int check = douutienthuattoan(s[i]);
+        int check = precedence(s[i]);
         if(check == 0){
             if(s[i] == '(') // Nếu gặp dấu "MỞ NGOẶC" thì push vào stack.
                 push_stack(stack, s[i]);
@@ -91,7 +91,7 @@ int main(){
             else{ //Ngược lại điều trên?
                 //Nếu độ ưu tiên <= Top thì lấy top ra và push "TOÁN TỬ" vào stack
                 //Nếu độ ưu tiên > Top thì ta push và stack
-                while(stack != NULL && check <= douutienthuattoan(Top(stack))){
+                while(stack != NULL && check <= precedence(Top(stack))){
                     cout << Top(stack) << " ";
                     pop_stack(stack);
                 }
